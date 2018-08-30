@@ -4,3 +4,4 @@
 - fill out Wordpress register and then login
 - Appearances->Themes: activate html5blank theme
 - Plugins->Installed Plugins: activate Echo Knowledge Base plugin
+- `docker-compose -f docker-compose.wordpress-test.yml down` when finished
