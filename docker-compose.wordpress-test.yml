@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: wordpress.dockerfile
+    restart: always
+    depends_on:
+      - db
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_FS_METHOD: direct
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress_dev
+      WORDPRESS_DB_USER: local
+      WORDPRESS_DB_PASSWORD: localpassword
+
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - type: volume
+        source: dbdata3
+        target: /var/lib/wordpress
+    ports:
+      - "33063:3306"
+    environment:
+      MYSQL_HOST: localhost
+      MYSQL_DATABASE: wordpress_dev
+      MYSQL_USER: local
+      MYSQL_PASSWORD: localpassword
+      MYSQL_ROOT_PASSWORD: secret
+
+  node:
+    image: node
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+
+volumes:
+  dbdata3:
