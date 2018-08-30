@@ -1,4 +1,5 @@
 - `git clone https://github.com/roerjo/docker-wordpress.git`
+- `cd docker-wordpress`
 - `docker-compose -f docker-compose.wordpress-test.yml up -d`
 - navigate a web browser to localhost:8000
 - fill out Wordpress register and then login
